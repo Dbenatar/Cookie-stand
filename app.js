@@ -19,90 +19,50 @@ function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-const seattle = {
-  location: "Seattle",
-  minCust: 23,
-  maxCust: 65,
-  avgCookiesPerCust: 6.3,
-  customersPerHour: [],
-  cookiesPerHour: [],
-  totalCookieSold: 0,
-  calculateSales: function () {
-    for (let i = 0; i < hours.length; i++) {
-      const randNum = randomNumber(this.minCust, this.maxCust);
-      this.customersPerHour.push(randNum);
-      this.cookiesPerHour.push(Math.floor(randNum * this.avgCookiesPerCust));
-    }
-  },
+function Store(location, minCust, maxCust, avgCookiesPerCust) {
+  this.location = location;
+  this.minCust = minCust;
+  this.maxCust = maxCust;
+  this.avgCookiesPerCust = avgCookiesPerCust;
+  this.customersPerHour = [];
+  this.totalCookieSold = 0;
+  this.cookiesPerHour = [];
+}
+Store.prototype.calculateSales = function () {
+  for (let i = 0; i < hours.length; i++) {
+    const randNum = randomNumber(this.minCust, this.maxCust);
+    this.customersPerHour.push(randNum);
+    this.cookiesPerHour.push(Math.floor(randNum * this.avgCookiesPerCust));
+  }
+};
+Store.prototype.render = function () {
+  const cookieStore = document.getElementById("cookieStore");
+  const div = document.createElement("div");
+
+  const h2 = document.createElement("h2");
+  h2.textContent = this.location;
+  div.appendChild(h2);
+
+  const ul = document.createElement("ul");
+  for (let i = 0; i < this.hours.length; i++) {
+    const li = document.createElement("li");
+    li.textContent = this.hours[i];
+    ul.appendChild(li);
+  }
+  div.appendChild(ul);
+
+  cookieStore.appendChild(div);
 };
 
-const tokyo = {
-  location: "Tokyo",
-  minCust: 3,
-  maxCust: 24,
-  avgCookiesPerCust: 1.2,
-  customersPerHour: [],
-  cookiesPerHour: [],
-  totalCookieSold: 0,
-  calculateSales: function () {
-    for (let i = 0; i < hours.length; i++) {
-      const randNum = randomNumber(this.minCust, this.maxCust);
-      this.customersPerHour.push(randNum);
-      this.cookiesPerHour.push(Math.floor(randNum * this.avgCookiesPerCust));
-    }
-  },
-};
+const seattle = new Store("Seattle", 23, 65, 6.3);
 
-const dubai = {
-  location: "Dubai",
-  minCust: 11,
-  maxCust: 38,
-  avgCookiesPerCust: 3.7,
-  customersPerHour: [],
-  cookiesPerHour: [],
-  totalCookieSold: 0,
-  calculateSales: function () {
-    for (let i = 0; i < hours.length; i++) {
-      const randNum = randomNumber(this.minCust, this.maxCust);
-      this.customersPerHour.push(randNum);
-      this.cookiesPerHour.push(Math.floor(randNum * this.avgCookiesPerCust));
-    }
-  },
-};
+const tokyo = new Store("Tokyo", 3, 24, 1.2);
 
-const paris = {
-  location: "Paris",
-  minCust: 20,
-  maxCust: 38,
-  avgCookiesPerCust: 2.3,
-  customersPerHour: [],
-  cookiesPerHour: [],
-  totalCookieSold: 0,
-  calculateSales: function () {
-    for (let i = 0; i < hours.length; i++) {
-      const randNum = randomNumber(this.minCust, this.maxCust);
-      this.customersPerHour.push(randNum);
-      this.cookiesPerHour.push(Math.floor(randNum * this.avgCookiesPerCust));
-    }
-  },
-};
+const dubai = new Store("Dubai", 11, 38, 3.7);
 
-const lima = {
-  location: "Lima",
-  minCust: 2,
-  maxCust: 16,
-  avgCookiesPerCust: 4.6,
-  customersPerHour: [],
-  cookiesPerHour: [],
-  totalCookieSold: 0,
-  calculateSales: function () {
-    for (let i = 0; i < hours.length; i++) {
-      const randNum = randomNumber(this.minCust, this.maxCust);
-      this.customersPerHour.push(randNum);
-      this.cookiesPerHour.push(Math.floor(randNum * this.avgCookiesPerCust));
-    }
-  },
-};
+const paris = new Store("Paris", 20, 38, 2.3);
+
+const lima = new Store("Lima", 2, 16, 4.6);
 
 seattle.calculateSales();
 console.log(seattle);
@@ -121,10 +81,10 @@ console.log(lima);
 
 const cookieStore = document.getElementById("cookieStore");
 
-const seattleH2 = document.createElement("h2");
-seattleH2.textContent = seattle.location;
-console.log(seattle.location);
-cookieStore.appendChild(seattleH2);
+const H2 = document.createElement("h2");
+H2.textContent = this.location;
+console.log(this.location);
+cookieStore.appendChild(H2);
 
 const seattleUl = document.createElement("ul");
 for (let i = 0; i < hours.length; i++) {
