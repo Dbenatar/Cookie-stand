@@ -38,7 +38,7 @@ Store.prototype.calculateSales = function () {
     const hourCookiesSold = Math.floor(hourCustomers * this.avgCookiesPerCust);
     this.cookiesPerHour.push(hourCookiesSold);
 
-    this.totalCookieSold = this.totalCookieSold + this.cookiesPerHour;
+    this.totalCookieSold = this.totalCookieSold + hourCookiesSold;
   }
 };
 
@@ -109,7 +109,7 @@ headerRow.appendChild(blankTd);
 
 for (let i = 0; i < hours.length; i++) {
   const th = document.createElement("th");
-  th.textContent = hours[i];
+  th.textContent = hours.length[i];
   headerRow.appendChild(th);
 }
 
@@ -176,3 +176,18 @@ lima.render();
 //   limaUl.appendChild(li);
 // }
 // cookieStore.appendChild(limaUl);
+
+const form = document.getElementById("newstore");
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const location = event.target.name.value;
+  const minCust = event.target.minCust.value;
+  const maxCust = event.target.maxCust.value;
+  const avgCookiesPerCust = event.target.avgCookiesPerCust.value;
+
+  const newStore = new Store(location, minCust, maxCust, avgCookiesPerCust);
+
+  newStore.render();
+});
