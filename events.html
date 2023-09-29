@@ -9,10 +9,28 @@
   <body>
     <form id="storename">
       <fieldset>
-        <label>Store location</label>
-        <input name="London" type="text" id="name" />
+        <legend>New Store location</legend>
+        <div>
+        <label for="locationName">Store location</label>
+        <input type="text" id="name"/>
+        </div>
         <br />
+        <div>
+          <label for="minCustomers">Minimum Customers per hour:</label>
+          <input type="number" id="minCustomers" min="1" required/>
+          </div>
+          <br />
+          <div>
+            <label for="maxCustomers">Maximum Customers per hour</label>
+            <input type="number" id="maxCustomers" min="1" required/>
+            </div>
+            <br />
+            <div>
+              <label for="average">Maximum Customers per hour</label>
+              <input type="number" id="maxCustomers" min="1" required/>
+              </div>
         <button>Submit</button>
+        </div>
       </fieldset>
     </form>
   </body>

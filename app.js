@@ -191,3 +191,5 @@ form.addEventListener("submit", function (event) {
 
   newStore.render();
 });
+
+const myButton = document.querySelector("button");
